@@ -54,31 +54,31 @@ Netflix-Clone/
 
 ### Home Page
 
-![Home Page](public/screenshot/movieMain.png)
+![Home Page](public/screenShot/movieMain.png)
 
 ### Movie Cards
 
-![Movie Cards](public/screenshot/movieCard.png)
+![Movie Cards](public/screenShot/movieCard.png)
 
 ### Single Movie Page
 
-![Single Movie Page](public/screenshot/singleMoviepage.png)
+![Single Movie Page](public/screenShot/singleMoviepage.png)
 
 ### View Movies Page
 
-![View Movies Page](public/screenshot/viewMovies.png)
+![View Movies Page](public/screenShot/viewMovies.png)
 
 ### Add Movie Page
 
-![Add Movie Page](public/screenshot/addMovie.png)
+![Add Movie Page](public/screenShot/addMovie.png)
 
 ### Edit Movie Page
 
-![Edit Movie Page](public/screenshot/editMovie.png)
+![Edit Movie Page](public/screenShot/editMovie.png)
 
 ### Footer
 
-![Footer](public/screenshot/footer.png)
+![Footer](public/screenShot/footer.png)
 
 ## 🚀 Getting Started
 
