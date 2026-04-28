@@ -3,15 +3,14 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
 :root {
-    --bg-color: #EAE7E0; /* Slightly darker, warm light theme (premium paper feel) */
-    --nav-bg: #F2EFE9; /* Subtle contrast for navbar and footer */
-    --nav-text: #1A1A1A; /* Dark text for light background */
-    --text-main: #1A1A1A; /* Softened rich black */
+    --bg-color: #EAE7E0;
+    --nav-bg: #F2EFE9; 
+    --nav-text: #1A1A1A;
+    --text-main: #1A1A1A;
     --text-muted: #666666;
     --border-color: #D1CEC7;
 }
 
-/* --- Reset --- */
 * {
     margin: 0;
     padding: 0;
@@ -134,7 +133,6 @@ h1, h2, h3, .serif, .logo {
     color: var(--nav-text);
 }
 
-/* --- Main Content Structure --- */
 main {
     flex: 1;
     padding: 1rem 0;
@@ -180,14 +178,12 @@ main {
     position: relative;
     overflow: hidden;
     margin-bottom: 1.5rem;
-    /* Subtle asymmetric radius: flat on the spine (left), slightly rounded on the pages (right) */
     border-radius: 2px 8px 8px 2px; 
     box-shadow: -2px 0 5px rgba(0,0,0,0.03), 8px 12px 24px rgba(0,0,0,0.06);
     transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1),
                 box-shadow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* 🔥 IMAGE FULL FIT & HOVER ZOOM */
 .book-img {
     width: 100%;
     height: 100%;
@@ -199,8 +195,6 @@ main {
     transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-
-/* 🔥 SUBTLE BORDER FRAME (replaces the heavy inner border) */
 .book-cover::after {
     content: '';
     position: absolute;
@@ -217,14 +211,14 @@ main {
     z-index: 1;
 }
 
-/* --- HOVER EFFECTS --- */
+/* --- HOVER  --- */
 .card:hover .book-cover {
     transform: translateY(-8px);
     box-shadow: -2px 0 5px rgba(0,0,0,0.04), 12px 20px 32px rgba(0,0,0,0.12);
 }
 
 .card:hover .book-img {
-    transform: scale(1.05); /* Premium slow zoom on the artwork */
+    transform: scale(1.05);
 }
 
 .card:hover .info-action {
@@ -239,8 +233,8 @@ main {
 .book-info {
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Pushes the bottom info down */
-    text-align: left; /* Left alignment often looks more editorial/premium */
+    flex-grow: 1;
+    text-align: left;
     padding: 0 0.5rem;
 }
 
@@ -255,7 +249,6 @@ main {
     line-height: 1.2;
     margin-bottom: 0.3rem;
     color: var(--text-main);
-    /* Truncates long titles to 2 lines so cards stay uniform */
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -271,14 +264,13 @@ main {
     margin: 0;
 }
 
-/* Spreads price and action link horizontally */
 .info-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: auto; /* Forces this to the very bottom of the card */
+    margin-top: auto;
     padding-top: 1rem;
-    border-top: 1px solid rgba(0,0,0,0.08); /* Crisp divider */
+    border-top: 1px solid rgba(0,0,0,0.08);
 }
 
 .info-price {
@@ -305,7 +297,7 @@ main {
     transition: transform 0.3s ease;
 }
 
-/* --- Structured Form Enhancements (New Two-Column Form) --- */
+/* --- Structured Form --- */
 .structured-form {
     max-width: 1100px; 
     margin: 0 auto;
@@ -319,7 +311,7 @@ main {
     display: grid;
     grid-template-columns: 1.5fr 1fr; 
     gap: 4rem;
-    margin-bottom: 3rem; /* Pushes the submit button down */
+    margin-bottom: 3rem;
 }
 
 .form-section-title {
@@ -398,17 +390,14 @@ main {
 
 /* --- Custom Image Upload Area --- */
 .form-media {
-    /* This stops the right column from stretching out of control */
     align-self: start; 
 }
 
-/* --- Custom Image Upload Area --- */
+/* --- Custom Image Upload --- */
 .upload-area {
     position: relative;
     background-color: var(--bg-color);
     border: 1px dashed var(--text-muted);
-    
-    /* Fixed dimensions so it NEVER overlaps the button */
     width: 100%;
     height: 400px; 
     
@@ -528,7 +517,7 @@ footer {
 /* --- Elegant Table View --- */
 .table-container {
     width: 100%;
-    overflow-x: auto; /* Allows horizontal scrolling on small mobile screens */
+    overflow-x: auto;
     background: var(--nav-bg);
     padding: 2rem;
     border: 1px solid var(--border-color);
@@ -551,7 +540,6 @@ footer {
     vertical-align: middle;
 }
 
-/* Remove bottom border from the very last row */
 .elegant-table tbody tr:last-child td {
     border-bottom: none;
 }
@@ -589,7 +577,6 @@ footer {
 .elegant-table th:nth-child(4),
 .elegant-table td:nth-child(4) {
     width: 120px;
-    /* text-align: right; */
     white-space: nowrap;
 }
 
@@ -613,7 +600,7 @@ footer {
     object-fit: cover;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     border-radius: 2px 4px 4px 2px;
-    border-left: 2px solid rgba(255,255,255,0.4); /* Book spine effect */
+    border-left: 2px solid rgba(255,255,255,0.4);
     display: block;
 }
 
@@ -639,7 +626,7 @@ footer {
     background-color: var(--bg-color);
     padding: 0.4rem 0.8rem;
     border: 1px solid var(--border-color);
-    border-radius: 20px; /* Pill shape for categories */
+    border-radius: 20px;
     color: var(--text-muted);
     white-space: nowrap;
 }
@@ -689,7 +676,7 @@ footer {
 }
 
 .action-btn.delete {
-    color: #A94A32; /* A subtle, premium rust/red color */
+    color: #A94A32;
     border-bottom: 1px solid transparent;
 }
 
