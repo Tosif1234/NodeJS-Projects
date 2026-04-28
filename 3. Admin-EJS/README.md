@@ -17,6 +17,10 @@ A Node.js admin dashboard converted to use **EJS** templates for rendering the a
 - Uses Express with server-side rendering
 - Includes a modern admin theme with responsive layout support
 
+## 📸 Screenshot
+
+![Admin EJS Dashboard](images/dashboard.png)
+
 ## 📦 Dependencies
 
 - `express` — web server framework
