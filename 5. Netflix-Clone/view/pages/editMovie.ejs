@@ -17,7 +17,7 @@
             <div class="input-wrapper full-width">
         <label>Movie Poster</label>
         
-        <img id="posterPreview" src="/uploads/<%= movie.image %>" width="120" style="margin-bottom:10px; border-radius:8px;" />
+        <img id="posterPreview" class="poster-preview" src="/uploads/<%= movie.image %>" alt="<%= movie.name %> poster" />
 
         <input id="posterInput" type="file" name="image" accept="image/*">
         

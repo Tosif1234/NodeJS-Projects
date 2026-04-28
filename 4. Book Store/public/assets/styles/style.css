@@ -1,5 +1,6 @@
 /* --- Fonts & Variables --- */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
 :root {
     --bg-color: #EAE7E0; /* Slightly darker, warm light theme (premium paper feel) */
@@ -168,6 +169,11 @@ main {
     background: transparent;
 }
 
+.book-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
 .book-cover {
     aspect-ratio: 2 / 3;
     width: 100%;
@@ -189,6 +195,7 @@ main {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 0;
     transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -201,7 +208,13 @@ main {
     border: 1px solid rgba(0,0,0,0.06);
     border-radius: 2px 8px 8px 2px;
     pointer-events: none;
-    z-index: 3;
+    z-index: 2;
+}
+
+.cover-title,
+.cover-author {
+    position: relative;
+    z-index: 1;
 }
 
 /* --- HOVER EFFECTS --- */
@@ -379,6 +392,10 @@ main {
     margin-bottom: 2rem;
 }
 
+.form-group.no-bottom-margin {
+    margin-bottom: 0;
+}
+
 /* --- Custom Image Upload Area --- */
 .form-media {
     /* This stops the right column from stretching out of control */
@@ -455,6 +472,19 @@ main {
     height: 100%;
     object-fit: cover; 
     z-index: 5;
+}
+
+#image-preview.is-hidden,
+.upload-placeholder.is-hidden {
+    display: none;
+}
+
+#image-preview.is-visible {
+    display: block;
+}
+
+.upload-placeholder.is-visible {
+    display: flex;
 }
 
 /* --- Submit Button --- */
@@ -627,6 +657,11 @@ footer {
     margin: 0;
 }
 
+.inline-delete-form {
+    display: inline-flex;
+    margin: 0;
+}
+
 .action-btn {
     background: transparent;
     border: none;
@@ -703,6 +738,264 @@ footer {
 .table-empty-btn:hover {
     opacity: 0.6;
 }
+
+/* --- Home Empty State --- */
+.empty-state-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    width: 100%;
+    text-align: center;
+    padding: 2rem;
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    color: var(--border-color);
+    margin-bottom: 1.5rem;
+}
+
+.empty-state-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4.5rem;
+    font-weight: 400;
+    color: var(--text-main);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.empty-state-subtitle {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-muted);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 3rem;
+    max-width: 600px;
+}
+
+.empty-state-btn {
+    padding: 1.2rem 2.5rem;
+    font-size: 0.85rem;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+/* --- Single Book Details Layout --- */
+.details-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--nav-bg);
+    padding: 4rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    border: 1px solid var(--border-color);
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: start;
+}
+
+.details-cover-container {
+    background-color: #FFFFFF;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.04);
+}
+
+.details-cover {
+    width: 100%;
+    max-width: 350px;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 2px 6px 6px 2px;
+    box-shadow: -3px 0 10px rgba(0,0,0,0.05), 5px 5px 15px rgba(0,0,0,0.1);
+    border-left: 3px solid rgba(255,255,255,0.6);
+    -webkit-box-reflect: below 2px linear-gradient(transparent, transparent 80%, rgba(0,0,0,0.2));
+}
+
+.details-cover.no-cover {
+    background-color: #3A403D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+}
+
+.details-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.tag {
+    display: inline-block;
+    align-self: flex-start;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    padding: 0.4rem 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.details-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    line-height: 1.1;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.details-author {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+}
+
+.divider {
+    height: 1px;
+    background-color: var(--border-color);
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.stats-row {
+    display: flex;
+    gap: 4rem;
+}
+
+.stat-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.stat-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+}
+
+.stat-label.story-label {
+    margin-bottom: 1rem;
+}
+
+.stat-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.stat-value.price {
+    color: var(--text-main);
+}
+
+.story-content {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-main);
+}
+
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.btn {
+    padding: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.btn i,
+.details-author i,
+.back-link i {
+    font-size: 1.1rem;
+}
+
+.btn-edit {
+    background-color: var(--text-main);
+    color: var(--nav-bg);
+    border: 1px solid var(--text-main);
+}
+
+.btn-edit:hover {
+    background-color: transparent;
+    color: var(--text-main);
+}
+
+.btn-delete {
+    background-color: transparent;
+    color: #A94A32;
+    border: 1px solid rgba(169, 74, 50, 0.3);
+}
+
+.btn-delete:hover {
+    border-color: #A94A32;
+    background-color: rgba(169, 74, 50, 0.05);
+}
+
+.delete-book-form {
+    margin: 0;
+    display: flex;
+}
+
+.delete-book-form .btn-delete {
+    width: 100%;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: var(--text-main);
+}
+
+.current-cover-note {
+    display: block;
+    text-align: center;
+    margin-top: 0.5rem;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+}
 /* Responsive Table Adjustments */
 @media (max-width: 900px) {
     .table-container {
@@ -742,6 +1035,24 @@ footer {
     .form-row {
         flex-direction: column;
         gap: 2rem;
+    }
+
+    .details-wrapper {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 2rem;
+    }
+
+    .details-title {
+        font-size: 2.5rem;
+    }
+
+    .stats-row {
+        gap: 2rem;
+    }
+
+    .action-buttons {
+        grid-template-columns: 1fr;
     }
 }
 

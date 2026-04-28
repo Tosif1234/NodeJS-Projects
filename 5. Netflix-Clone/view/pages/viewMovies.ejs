@@ -31,7 +31,7 @@
                     <td><%= movie.isTrending ? "Yes" : "No" %></td>
                     <td class="action-btn">
                         <a href="/movies/edit/<%= movie._id %>" class="btn edit-btn">Edit</a>
-                        <form action="/movies/delete/<%= movie._id %>" method="POST" style="display:inline-block;">
+                        <form action="/movies/delete/<%= movie._id %>" method="POST" class="inline-form">
                             <button type="submit" class="btn delete-btn" onclick="return confirm('Are you sure you want to delete this movie?');">Delete</button>
                         </form>
                     </td>

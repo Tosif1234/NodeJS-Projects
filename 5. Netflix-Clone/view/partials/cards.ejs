@@ -6,7 +6,7 @@
       <% console.log('movies in cards:', movies); %>
       <% for (let i = 0; i < movies.length; i++) { %>
         <% const movie = movies[i]; %>
-        <a href="/movies/view/<%= movie._id %>" style="text-decoration: none; color: inherit;">
+        <a href="/movies/view/<%= movie._id %>" class="movie-card-link">
           <article class="movie-card">
             <span class="rank-number"><%= i + 1 %></span>
             <img 

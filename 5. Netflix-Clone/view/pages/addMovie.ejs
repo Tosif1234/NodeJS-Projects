@@ -20,7 +20,7 @@
 
             <div class="input-wrapper full-width">
                 <label>Poster File</label>
-                <img id="posterPreview" width="120" style="display:none; margin-bottom:10px; border-radius:8px;" />
+                <img id="posterPreview" class="poster-preview poster-preview-hidden" alt="Poster preview" />
                 <input id="posterInput" type="file" name="image" accept="image/*" required>
             </div>
 
@@ -76,12 +76,12 @@
         const file = posterInput.files[0];
 
         if (!file) {
-            posterPreview.style.display = "none";
+            posterPreview.classList.add("poster-preview-hidden");
             return;
         }
 
         posterPreview.src = URL.createObjectURL(file);
-        posterPreview.style.display = "block";
+        posterPreview.classList.remove("poster-preview-hidden");
     });
 </script>
 

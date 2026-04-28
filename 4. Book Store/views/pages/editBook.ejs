@@ -43,7 +43,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group full-width" style="margin-bottom: 0;">
+                        <div class="form-group full-width no-bottom-margin">
                             <label for="description">Description</label>
                             <textarea id="description" name="Description" required><%= book.Description %></textarea>
                         </div>
@@ -55,15 +55,15 @@
                         <div class="upload-area">
                             <input type="file" id="image" name="Image" accept="image/*" class="hidden-file-input">
                             
-                            <div class="upload-placeholder" id="upload-placeholder" style="display: none;">
+                            <div class="upload-placeholder is-hidden" id="upload-placeholder">
                                 <div class="upload-icon">⇪</div>
                                 <span>Select a new file</span>
                                 <small>JPEG, PNG, WEBP accepted</small>
                             </div>
 
-                            <img id="image-preview" src="/uploads/<%= book.Image %>" alt="Cover Preview" style="display: block;">
+                            <img id="image-preview" class="is-visible" src="/uploads/<%= book.Image %>" alt="Cover Preview">
                         </div>
-                        <small style="display: block; text-align: center; margin-top: 0.5rem; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 0.75rem;">
+                        <small class="current-cover-note">
                             Click the image to upload a replacement. Leave blank to keep the current cover.
                         </small>
                     </div>
@@ -91,8 +91,10 @@
                 
                 // Set image source and show it
                 imagePreview.src = objectURL;
-                imagePreview.style.display = 'block';
-                placeholder.style.display = 'none';
+                imagePreview.classList.remove('is-hidden');
+                imagePreview.classList.add('is-visible');
+                placeholder.classList.remove('is-visible');
+                placeholder.classList.add('is-hidden');
 
                 imagePreview.onload = function() {
                     URL.revokeObjectURL(imagePreview.src); // free memory
@@ -101,12 +103,16 @@
                 // If user opens the file dialog but clicks "Cancel", revert to the original database image
                 if (originalImageSrc) {
                     imagePreview.src = originalImageSrc;
-                    imagePreview.style.display = 'block';
-                    placeholder.style.display = 'none';
+                    imagePreview.classList.remove('is-hidden');
+                    imagePreview.classList.add('is-visible');
+                    placeholder.classList.remove('is-visible');
+                    placeholder.classList.add('is-hidden');
                 } else {
                     imagePreview.src = '';
-                    imagePreview.style.display = 'none';
-                    placeholder.style.display = 'flex';
+                    imagePreview.classList.remove('is-visible');
+                    imagePreview.classList.add('is-hidden');
+                    placeholder.classList.remove('is-hidden');
+                    placeholder.classList.add('is-visible');
                 }
             }
         });

@@ -1,75 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <%- include('../partials/head') %>
-    <style>
-        /* Ensures the uploaded image fills the cover perfectly */
-        .book-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-        }
-        
-        /* Forces the inner hardcover border overlay to stay on top of the image */
-        .book-cover::after {
-            z-index: 2; 
-        }
-
-        .cover-title, .cover-author {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* --- BIG CENTERED EMPTY STATE --- */
-        .empty-state-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 50vh; /* Takes up half the viewport height to stay perfectly centered */
-            width: 100%;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .empty-state-icon {
-            font-size: 3rem;
-            color: var(--border-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .empty-state-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 4.5rem; /* Massive premium heading */
-            font-weight: 400;
-            color: var(--text-main);
-            line-height: 1.1;
-            margin-bottom: 1rem;
-        }
-
-        .empty-state-subtitle {
-            font-family: 'Inter', sans-serif;
-            color: var(--text-muted);
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 3rem;
-            max-width: 600px;
-        }
-
-        .empty-state-btn {
-            padding: 1.2rem 2.5rem;
-            font-size: 0.85rem;
-            transition: 0.3s;
-            text-decoration: none;
-        }
-        
-    </style>
 </head>
 <body>
 
@@ -87,7 +19,7 @@
                 <div class="row">
                     <% books.forEach((book, index) => { %>
                         <div class="col">
-                            <a href="/book/<%= book.id%>" style="text-decoration: none; color: inherit;">
+                            <a href="/book/<%= book.id%>" class="book-card-link">
                                 <div class="card">
     <div class="book-cover cover-<%= (index % 4) + 1 %>">
         <img src="/uploads/<%= book.Image %>" class="book-img" alt="<%= book.Title %>">

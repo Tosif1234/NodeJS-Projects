@@ -307,6 +307,11 @@ body {
     flex-shrink: 0;
 }
 
+.movie-card-link {
+    color: inherit;
+    text-decoration: none;
+}
+
 .trending-container::-webkit-scrollbar {
     display: none;
 }
@@ -686,6 +691,17 @@ body {
     resize: none;
 }
 
+.poster-preview {
+    display: block;
+    width: 120px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.poster-preview-hidden {
+    display: none;
+}
+
 .form-container input:focus,
 .form-container textarea:focus,
 .form-container select:focus {
@@ -764,6 +780,10 @@ body {
     width: 56px;
     height: 72px;
     object-fit: cover;
+}
+
+.inline-form {
+    display: inline-block;
 }
 
 .btn {
