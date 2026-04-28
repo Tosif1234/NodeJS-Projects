@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- Single Book Details Layout --- */
+        .details-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--nav-bg);
+            padding: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 1fr 1.2fr; /* 40% Image, 60% Details */
+            gap: 5rem;
+            align-items: start;
+        }
+
+        /* --- Left Side: Cover Image --- */
+        .details-cover-container {
+            background-color: #FFFFFF;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.04);
+        }
+
+        .details-cover {
+            width: 100%;
+            max-width: 350px;
+            aspect-ratio: 2 / 3;
+            object-fit: cover;
+            border-radius: 2px 6px 6px 2px;
+            box-shadow: -3px 0 10px rgba(0,0,0,0.05), 5px 5px 15px rgba(0,0,0,0.1);
+            border-left: 3px solid rgba(255,255,255,0.6); /* Spine highlight */
+            
+            /* CSS Reflection effect */
+            -webkit-box-reflect: below 2px linear-gradient(transparent, transparent 80%, rgba(0,0,0,0.2));
+        }
+
+        /* --- Right Side: Information --- */
+        .details-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tag {
+            display: inline-block;
+            align-self: flex-start;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            padding: 0.4rem 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .details-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .details-author {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem; 
+            margin-bottom: 2rem;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: var(--border-color);
+            width: 100%;
+            margin: 2rem 0;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 4rem;
+        }
+
+        .stat-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .stat-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+
+        .stat-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .stat-value.price {
+            color: var(--accent-gold);
+        }
+
+        .story-content {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-main);
+        }
+
+        /* --- Buttons & Icons --- */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .btn {
+            padding: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.6rem; 
+        }
+
+        /* Set icon sizes */
+        .btn i, .details-author i, .back-link i {
+            font-size: 1.1rem;
+        }
+
+        .btn-edit {
+            background-color: var(--text-main);
+            color: var(--nav-bg);
+            border: 1px solid var(--text-main);
+        }
+
+        .btn-edit:hover {
+            background-color: transparent;
+            color: var(--text-main);
+        }
+
+        .btn-delete {
+            background-color: transparent;
+            color: #A94A32; /* Rust/Red for delete */
+            border: 1px solid rgba(169, 74, 50, 0.3);
+        }
+
+        .btn-delete:hover {
+            border-color: #A94A32;
+            background-color: rgba(169, 74, 50, 0.05);
+        }
+
+        /* Back link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--text-main);
+        }
+
+        /* --- Responsive Layout --- */
+        @media (max-width: 900px) {
+            .details-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                padding: 2rem;
+            }
+            .details-title {
+                font-size: 2.5rem;
+            }
+            .stats-row {
+                gap: 2rem;
+            }
+            .action-buttons {
+                grid-template-columns: 1fr; /* Stack buttons on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <%- include('../partials/navbar') %>
+
+    <main>
+        <div class="container">
+            <a href="/" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Library
+            </a>
+
+            <div class="details-wrapper">
+                
+                <div class="details-cover-container">
+                    <% if (book.Image) { %>
+                        <img src="/uploads/<%= book.Image %>" alt="<%= book.Title %> Cover" class="details-cover">
+                    <% } else { %>
+                        <div class="details-cover" style="background-color: #3A403D; display: flex; align-items: center; justify-content: center; color: white;">No Cover</div>
+                    <% } %>
+                </div>
+
+                <div class="details-info">
+                    
+                    <div class="tag"><%= book.Category.join(', ') %></div>
+                    
+                    <h1 class="details-title"><%= book.Title %></h1>
+                    
+                    <div class="details-author">
+                        <i class="fa-regular fa-user"></i>
+                        <%= book.Author %>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="stats-row">
+                        <div class="stat-group">
+                            <span class="stat-label">Current Price</span>
+                            <span class="stat-value price">₹<%= book.Price.toFixed(2) %></span>
+                        </div>
+                        <div class="stat-group">
+                            <span class="stat-label">Availability</span>
+                            <span class="stat-value"><%= book.Quantity %> in stock</span>
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="stat-group">
+                        <span class="stat-label" style="margin-bottom: 1rem;">The Story</span>
+                        <p class="story-content">
+                            <%= book.Description %>
+                        </p>
+                    </div>
+
+                    <div class="action-buttons">
+                        <a href="/edit-Book/<%= book._id %>" class="btn btn-edit">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                            Edit Details
+                        </a>
+                        
+                        <form action="/delete/<%= book._id %>" method="POST" style="margin: 0; display: flex;">
+                            <button type="submit" class="btn btn-delete" style="width: 100%;" onclick="return confirm('Are you sure you want to delete this title?');">
+                                <i class="fa-regular fa-trash-can"></i>
+                                Delete Book
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <%- include('../partials/footer') %>
+
+</body>
+</html>

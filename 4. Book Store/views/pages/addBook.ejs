@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <style>
+        /* --- Structured Form Enhancements --- */
+        .structured-form {
+            max-width: 1100px; /* Made slightly wider for the two columns */
+            margin: 0 auto;
+            background: var(--nav-bg);
+            padding: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr; /* Left side takes more space than right */
+            gap: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Standardize input spacing */
+        .form-row {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group.full-width {
+            margin-bottom: 2rem;
+        }
+
+        /* --- Custom Image Upload Area --- */
+        .upload-area {
+            position: relative;
+            background-color: var(--bg-color);
+            border: 1px dashed var(--text-muted);
+            height: 100%;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .upload-area:hover {
+            border-color: var(--text-main);
+            background-color: rgba(234, 231, 224, 0.5); /* Slightly darker greige on hover */
+        }
+
+        .hidden-file-input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .upload-placeholder {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            pointer-events: none; /* Let clicks pass through to the input */
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            color: var(--text-main);
+        }
+
+        .upload-placeholder span {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-main);
+        }
+
+        .upload-placeholder small {
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        /* The actual preview image */
+        #image-preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image fills the box without stretching */
+            z-index: 5;
+        }
+
+        .submit-btn {
+            background-color: var(--text-main);
+            color: var(--nav-bg);
+            border: 1px solid var(--text-main);
+            padding: 1.2rem;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: transparent;
+            color: var(--text-main);
+        }
+
+        /* --- Responsive Tweaks for Grid --- */
+        @media (max-width: 900px) {
+            .form-layout {
+                grid-template-columns: 1fr; /* Stacks to single column on small screens */
+                gap: 3rem;
+            }
+            .upload-area {
+                min-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <%- include('../partials/navbar') %>
+
+    <main>
+        <div class="container" id="add-view">
+
+            <form class="structured-form" action="/add-Book" method="POST" enctype="multipart/form-data">
+                
+                <div class="form-layout">
+                    <div class="form-details">
+                        <h3 class="form-section-title">Manuscript Details</h3>
+                        
+                        <div class="form-group full-width">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="Title" required placeholder="e.g. The Great Gatsby">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="author">Author</label>
+                                <input type="text" id="author" name="Author" required placeholder="e.g. F. Scott Fitzgerald">
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <input type="text" id="category" name="Category" required placeholder="e.g. Fiction, Classic">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="price">Price ($)</label>
+                                <input type="number" id="price" name="Price" step="0.01" min="0" required placeholder="0.00">
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity">Quantity in Stock</label>
+                                <input type="number" id="quantity" name="Quantity" min="0" required placeholder="0">
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width" style="margin-bottom: 0;">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="Description" required placeholder="Provide a brief synopsis of the book..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-media">
+                        <h3 class="form-section-title">Cover Artwork</h3>
+                        
+                        <div class="upload-area">
+                            <input type="file" id="image" name="Image" accept="image/*" required class="hidden-file-input">
+                            
+                            <div class="upload-placeholder" id="upload-placeholder">
+                                <div class="upload-icon">⇪</div>
+                                <span>Select a file</span>
+                                <small>JPEG, PNG, WEBP accepted</small>
+                            </div>
+
+                            <img id="image-preview" src="" alt="Cover Preview" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Add to Archive</button>
+            </form>
+        </div>
+    </main>
+
+    <%- include('../partials/footer') %>
+
+    <script>
+        
+        document.getElementById('image').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const imagePreview = document.getElementById('image-preview');
+            const placeholder = document.getElementById('upload-placeholder');
+
+            if (file) {
+                // Create temp URL
+                const objectURL = URL.createObjectURL(file);
+                
+                // Set image source and show it
+                imagePreview.src = objectURL;
+                imagePreview.style.display = 'block';
+                
+                // Hide the placeholder text/icon
+                placeholder.style.display = 'none';
+
+                // Cleanup memory
+                imagePreview.onload = function() {
+                    URL.revokeObjectURL(imagePreview.src);
+                }
+            } else {
+                // If user cancels selection, revert to placeholder
+                imagePreview.src = '';
+                imagePreview.style.display = 'none';
+                placeholder.style.display = 'flex';
+            }
+        });
+    </script>
+</body>
+</html>
