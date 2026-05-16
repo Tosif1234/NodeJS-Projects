@@ -1,0 +1,130 @@
+<%- include('../partials/header') %>
+
+<!-- Content -->
+<div class="container-xxl">
+  <div class="authentication-wrapper authentication-basic d-flex align-items-center justify-content-center min-vh-100">
+    <div class="authentication-inner" style="max-width: 400px; width: 100%;">
+      
+      <!-- Login Card -->
+      <div class="card shadow-sm">
+        <div class="card-body p-4 p-sm-5">
+          
+          <!-- Logo -->
+          <div class="app-brand justify-content-center mb-4">
+            <a href="index.html" class="app-brand-link gap-2 text-decoration-none">
+              <span class="app-brand-logo demo">
+                <!-- Materio Purple Logo Icon -->
+                <i class="fas fa- lifeboat text-primary fs-3"></i>
+              </span>
+              <span class="app-brand-text demo text-heading fw-bold fs-4">Materio</span>
+            </a>
+          </div>
+
+          <% if (error) { %>
+          <div class="alert alert-danger alert-dismissible fade show text-center py-2 mb-3" role="alert">
+            <small><%= error %></small>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <% } %>
+
+          <h5 class="mb-1 text-center">Welcome back! 👋🏻</h5>
+          <p class="mb-4 text-center text-muted small">Log in to manage your account</p>
+
+          <form id="formAuthentication" action="/login" method="POST">
+            <div class="form-floating form-floating-outline mb-3">
+              <input type="text" class="form-control" id="email" name="email" placeholder="Email or Username" autofocus />
+              <label for="email">Email or Username</label>
+            </div>
+
+            <div class="mb-3">
+              <div class="form-password-toggle">
+                <div class="input-group input-group-merge">
+                  <div class="form-floating form-floating-outline">
+                    <input type="password" id="password" class="form-control" name="password" placeholder="············" />
+                    <label for="password">Password</label>
+                  </div>
+                  <!-- Font Awesome Password Toggle -->
+                  <span class="input-group-text cursor-pointer" id="togglePassword">
+                    <i class="far fa-eye-slash" id="eyeIcon"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="form-check mb-0">
+                <input class="form-check-input" type="checkbox" id="remember-me" />
+                <label class="form-check-label small" for="remember-me">Remember Me</label>
+              </div>
+              <a href="auth-forgot-password-basic.html" class="small text-decoration-none">Forgot Password?</a>
+            </div>
+
+            <button class="btn btn-primary d-grid w-100 mb-3 py-2" type="submit" style="background-color: #8C57FF; border-color: #8C57FF;">Login</button>
+          </form>
+
+          <p class="text-center mb-4 small">
+            <span>New here?</span>
+            <a href="auth-register-basic.html" class="text-decoration-none">Create account</a>
+          </p>
+
+          <div class="divider my-4">
+            <div class="divider-text text-muted">or</div>
+          </div>
+
+          <!-- Font Awesome Social Icons -->
+          <div class="d-flex justify-content-center gap-5">
+            <a href="facebook:;" class="text-facebook fs-4">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="twitter:;" class="text-twitter fs-4">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="github:;" class="text-github fs-4" style="color: #333;">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="google:;" class="text-google fs-4" style="color: #db4437;">
+              <i class="fab fa-google"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Background Illustrations (The "Trees" from your screenshot) -->
+<img 
+  src="../assets/img/illustrations/tree-3.png" 
+  alt="auth-tree" 
+  class="d-none d-lg-block" 
+  style="position: fixed; left: 4%; bottom: 0; z-index: -1; width: 120px;" 
+/>
+
+<img 
+  src="../assets/img/illustrations/tree.png" 
+  alt="auth-tree" 
+  class="d-none d-lg-block" 
+  style="position: fixed; right: 4%; bottom: 0; z-index: -1; width: 100px;" 
+/>
+
+<!-- Updated Toggle Script for Font Awesome -->
+<script>
+  document.getElementById('togglePassword').addEventListener('click', function () {
+    const passwordInput = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+    
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      // Switch from Eye-Slash to Eye
+      eyeIcon.classList.remove('fa-eye-slash', 'far');
+      eyeIcon.classList.add('fa-eye', 'fas');
+    } else {
+      passwordInput.type = 'password';
+      // Switch from Eye to Eye-Slash
+      eyeIcon.classList.remove('fa-eye', 'fas');
+      eyeIcon.classList.add('fa-eye-slash', 'far');
+    }
+  });
+</script>
+
+<%- include('../partials/scripts') %>
