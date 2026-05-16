@@ -42,6 +42,9 @@ route.get('/login',(req,res)=>{
 })
 route.post('/login',adminController.loginUser);
 
+route.get('/register', adminController.registerPage);
+route.post('/register', adminController.registerUser);
+
 route.get('/logout', (req, res) => {
   res.clearCookie('userId');
   res.redirect('/login');

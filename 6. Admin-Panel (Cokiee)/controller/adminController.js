@@ -1,4 +1,5 @@
   const express = require('express');
+  const bcrypt = require('bcrypt');
 
   const admin = require('../model/adminSchema');
 
@@ -8,6 +9,10 @@
 
   module.exports.formLayoutPage = (req, res) => {
     res.render('pages/form-layout', { activePage: 'form-layout' });
+  };
+
+  module.exports.registerPage = (req, res) => {
+    res.render('pages/register', { error: null });
   };
 
  module.exports.userListPage = async (req, res) => {
@@ -30,7 +35,9 @@
 
           const image = req.file ? req.file.filename : null;
 
-          const newAdmin = new admin({fullName,phoneNumber,email,password,role,plan,status,note, Image : image});
+          const hashedPassword = await bcrypt.hash(password, 10);
+
+          const newAdmin = new admin({fullName,phoneNumber,email,password: hashedPassword,role,plan,status,note, Image : image});
 
           await newAdmin.save();
 
@@ -41,6 +48,45 @@
           console.log(error);
       }
   }
+
+module.exports.registerUser = async(req,res)=>{
+  try {
+    const {fullName, phoneNumber, email, password} = req.body;
+
+    const existingUser = await admin.findOne({email});
+
+    if(existingUser){
+      return res.render('pages/register',{
+        error : "Email already exists !!"
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = await admin.create({
+      fullName,
+      phoneNumber,
+      email,
+      password: hashedPassword,
+      role: "User",
+      plan: "Basic",
+      status: "Active",
+      note: "Registered user"
+    });
+
+    res.cookie('userId', newUser._id, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000
+    });
+
+    res.redirect('/dashboard');
+  } catch (error) {
+    console.log(error);
+    res.render('pages/register',{
+      error : "Something went wrong. Please try again."
+    });
+  }
+}
 
 module.exports.editPage = async (req, res) => {
   try {
@@ -94,6 +140,7 @@ module.exports.deleteUser = async (req, res) => {
 
 
 module.exports.loginUser = async(req,res)=>{
+  
   try {
     const {email,password} = req.body;
 
@@ -105,7 +152,9 @@ module.exports.loginUser = async(req,res)=>{
       });
     }
 
-    if(user.password !== password){
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+    if(!isPasswordMatch){
       return res.render('pages/login',{
         error : "Wrong Password..."
       });
@@ -122,31 +171,3 @@ module.exports.loginUser = async(req,res)=>{
     
   }
 }
-
-async function createDefaultAdmin() {
-  try {
-    const existing = await admin.findOne({ email: "admin@gmail.com" });
-
-    if (!existing) {
-      await admin.create({
-        fullName: "Admin",
-        phoneNumber: "9999999999",
-        email: "admin@gmail.com",
-        password: "1234",
-        role: "Admin",
-        plan: "Premium",
-        status: "Active",
-        note: "Default admin"
-      });
-
-      console.log("Default Admin Created");
-    } else {
-      console.log("Admin already exists");
-    }
-
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-createDefaultAdmin();

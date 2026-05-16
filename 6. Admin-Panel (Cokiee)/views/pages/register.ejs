@@ -4,14 +4,14 @@
 <div class="container-xxl">
   <div class="authentication-wrapper authentication-basic d-flex align-items-center justify-content-center min-vh-100">
     <div class="authentication-inner" style="max-width: 400px; width: 100%;">
-      
-      <!-- Login Card -->
+
+      <!-- Register Card -->
       <div class="card shadow-sm">
         <div class="card-body p-4 p-sm-5">
-          
+
           <!-- Logo -->
           <div class="app-brand justify-content-center mb-2">
-            <a href="index.html" class="app-brand-link gap-3 text-decoration-none">
+            <a href="/dashboard" class="app-brand-link gap-3 text-decoration-none">
                 <span class="text-primary">
     <svg width="30" height="24" viewBox="0 0 250 196" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M12.3002 1.25469L56.655 28.6432C59.0349 30.1128 60.4839 32.711 60.4839 35.5089V160.63C60.4839 163.468 58.9941 166.097 56.5603 167.553L12.2055 194.107C8.3836 196.395 3.43136 195.15 1.14435 191.327C0.395485 190.075 0 188.643 0 187.184V8.12039C0 3.66447 3.61061 0.0522461 8.06452 0.0522461C9.56056 0.0522461 11.0271 0.468577 12.3002 1.25469Z" fill="currentColor" />
@@ -38,23 +38,32 @@
           </div>
           <% } %>
 
-          <h5 class="mb-1 text-center">Welcome to Materio! 👋🏻</h5>
-          <p class="mb-7 text-center text-muted small">Please sign-in to your account and start the adventure</p>
+          <h5 class="mb-1 text-center">Adventure starts here 🚀</h5>
+          <p class="mb-4 text-center text-muted small">Sign up to start managing your dashboard</p>
 
-          <form id="formAuthentication" action="/login" method="POST">
+          <form id="formAuthentication" action="/register" method="POST">
             <div class="form-floating form-floating-outline mb-3">
-              <input type="text" class="form-control" id="email" name="email" placeholder="Email or Username" autofocus />
-              <label for="email">Email or Username</label>
+              <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Full Name" required autofocus />
+              <label for="fullName">Full Name</label>
+            </div>
+
+            <div class="form-floating form-floating-outline mb-3">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email" required />
+              <label for="email">Email</label>
+            </div>
+
+            <div class="form-floating form-floating-outline mb-3">
+              <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required />
+              <label for="phoneNumber">Phone Number</label>
             </div>
 
             <div class="mb-3">
               <div class="form-password-toggle">
                 <div class="input-group input-group-merge">
                   <div class="form-floating form-floating-outline">
-                    <input type="password" id="password" class="form-control" name="password" placeholder="············" />
+                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required />
                     <label for="password">Password</label>
                   </div>
-                  <!-- Font Awesome Password Toggle -->
                   <span class="input-group-text cursor-pointer" id="togglePassword">
                     <i class="far fa-eye-slash" id="eyeIcon"></i>
                   </span>
@@ -62,27 +71,18 @@
               </div>
             </div>
 
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <div class="form-check mb-0">
-                <input class="form-check-input" type="checkbox" id="remember-me" />
-                <label class="form-check-label small" for="remember-me">Remember Me</label>
-              </div>
-              <a href="auth-forgot-password-basic.html" class="small text-decoration-none">Forgot Password?</a>
-            </div>
-
-            <button class="btn btn-primary d-grid w-100 mb-3 py-2" type="submit" style="background-color: #8C57FF; border-color: #8C57FF;">Login</button>
+            <button class="btn btn-primary d-grid w-100 mb-3 py-2" type="submit" style="background-color: #8C57FF; border-color: #8C57FF;">Register</button>
           </form>
 
           <p class="text-center mb-4 small">
-            <span>New here?</span>
-            <a href="/register" class="text-decoration-none">Create account</a>
+            <span>Already have an account?</span>
+            <a href="/login" class="text-decoration-none">Login</a>
           </p>
 
           <div class="divider my-4">
             <div class="divider-text text-muted">or</div>
           </div>
 
-          <!-- Font Awesome Social Icons -->
           <div class="d-flex justify-content-center gap-5">
             <a href="facebook:;" class="text-facebook fs-4">
               <i class="fab fa-facebook-f"></i>
@@ -103,35 +103,32 @@
     </div>
   </div>
 </div>
-<!-- Background Illustrations (The "Trees" from your screenshot) -->
-<img 
-  src="../assets/img/illustrations/tree-3.png" 
-  alt="auth-tree" 
-  class="d-none d-lg-block" 
-  style="position: fixed; left: 4%; bottom: 0; z-index: -1; width: 120px;" 
+
+<img
+  src="../assets/img/illustrations/tree-3.png"
+  alt="auth-tree"
+  class="d-none d-lg-block"
+  style="position: fixed; left: 4%; bottom: 0; z-index: -1; width: 120px;"
 />
 
-<img 
-  src="../assets/img/illustrations/tree.png" 
-  alt="auth-tree" 
-  class="d-none d-lg-block" 
-  style="position: fixed; right: 4%; bottom: 0; z-index: -1; width: 100px;" 
+<img
+  src="../assets/img/illustrations/tree.png"
+  alt="auth-tree"
+  class="d-none d-lg-block"
+  style="position: fixed; right: 4%; bottom: 0; z-index: -1; width: 100px;"
 />
 
-<!-- Updated Toggle Script for Font Awesome -->
 <script>
   document.getElementById('togglePassword').addEventListener('click', function () {
     const passwordInput = document.getElementById('password');
     const eyeIcon = document.getElementById('eyeIcon');
-    
+
     if (passwordInput.type === 'password') {
       passwordInput.type = 'text';
-      // Switch from Eye-Slash to Eye
       eyeIcon.classList.remove('fa-eye-slash', 'far');
       eyeIcon.classList.add('fa-eye', 'fas');
     } else {
       passwordInput.type = 'password';
-      // Switch from Eye to Eye-Slash
       eyeIcon.classList.remove('fa-eye', 'fas');
       eyeIcon.classList.add('fa-eye-slash', 'far');
     }
