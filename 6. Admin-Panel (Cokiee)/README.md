@@ -1,49 +1,49 @@
-# Admin Panel EJS
+# 🧩 Admin Panel EJS with Cookie
 
 A clean Node.js, Express, MongoDB, and EJS admin dashboard built with Materio Bootstrap UI. It includes login, registration, dashboard analytics, user CRUD, profile image uploads, searchable/filterable user lists, CSV export, dynamic role/status UI, and light/dark theme support.
 
-## Screenshots
+## 📸 Screenshots
 
-### Login Page
+### 🔐 Login Page
 ![Login Page](public/screenshot/login.png)
 
-### Dashboard
+### 📊 Dashboard
 ![Dashboard](public/screenshot/dashboard.png)
 
-### Add User
+### ➕ Add User
 ![Add User](public/screenshot/addUser.png)
 
-### User List
+### 👥 User List
 ![User List](public/screenshot/userList.png)
 
-## Features
+## ✨ Features
 
-- User registration and login
-- Password hashing with `bcrypt`
-- Cookie-based authentication
-- Dashboard page with analytics UI
-- Add, view, edit, and delete users
-- Profile image upload with Multer
-- User search and filters by role, plan, and status
-- CSV export for visible/filtered users
-- Dynamic role icons and status pill badges
-- Light, dark, and system theme switcher
-- Shared EJS partials for header, navbar, sidebar, footer, and scripts
-- Static assets served from `public`
+- 🔐 User registration and login
+- 🛡️ Password hashing with `bcrypt`
+- 🍪 Cookie-based authentication
+- 📊 Dashboard page with analytics UI
+- 👥 Add, view, edit, and delete users
+- 🖼️ Profile image upload with Multer
+- 🔎 User search and filters by role, plan, and status
+- 📤 CSV export for visible/filtered users
+- 🏷️ Dynamic role icons and status pill badges
+- 🌗 Light, dark, and system theme switcher
+- 🧩 Shared EJS partials for header, navbar, sidebar, footer, and scripts
+- 📁 Static assets served from `public`
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-- Node.js
-- Express.js
-- EJS
-- MongoDB
-- Mongoose
-- Bcrypt
-- Multer
-- Cookie Parser
-- Bootstrap / Materio assets
+- 🟢 Node.js
+- 🚀 Express.js
+- 🧩 EJS
+- 🍃 MongoDB
+- 🔗 Mongoose
+- 🛡️ Bcrypt
+- 🖼️ Multer
+- 🍪 Cookie Parser
+- 🎨 Bootstrap / Materio assets
 
-## Project Structure
+## 📁 Project Structure
 
 ```text
 .
@@ -67,11 +67,11 @@ A clean Node.js, Express, MongoDB, and EJS admin dashboard built with Materio Bo
 `-- README.md
 ```
 
-## Requirements
+## ✅ Requirements
 
-- Node.js installed
-- MongoDB running locally
-- npm installed
+- 🟢 Node.js installed
+- 🍃 MongoDB running locally
+- 📦 npm installed
 
 The database connection currently uses:
 
@@ -81,7 +81,7 @@ mongodb://localhost:27017/adminDB
 
 You can change it in `config/db.js` if needed.
 
-## Installation & Run
+## 🚀 Installation & Run
 
 Install dependencies:
 
@@ -101,7 +101,7 @@ Open the app:
 http://localhost:8081
 ```
 
-## Login & Registration
+## 🔑 Login & Registration
 
 There is no default admin account created automatically.
 
@@ -113,7 +113,7 @@ http://localhost:8081/register
 
 After registration, the password is stored as a bcrypt hash and the user is logged in automatically.
 
-## Main Routes
+## 🧭 Main Routes
 
 | Method | Route | Description |
 | --- | --- | --- |
@@ -131,7 +131,7 @@ After registration, the password is stored as a bcrypt hash and the user is logg
 | POST | `/users/update/:id` | Update user |
 | POST | `/users/delete/:id` | Delete user |
 
-## User Model
+## 🧾 User Model
 
 Users are stored with these fields:
 
@@ -153,7 +153,7 @@ Uploaded images are stored in:
 public/uploads
 ```
 
-## Scripts
+## 📜 Scripts
 
 ```bash
 npm run dev
@@ -161,14 +161,14 @@ npm run dev
 
 Runs the app with Nodemon.
 
-## Production Notes
+## ⚠️ Production Notes
 
-- Passwords are hashed with `bcrypt`.
-- Auth uses a simple `userId` cookie. Use stronger session handling for production.
-- The MongoDB URL is hardcoded in `config/db.js`; environment variables are recommended.
-- Uploaded files should be validated more strictly before production use.
-- Add stronger validation for registration and login fields before production.
+- 🛡️ Passwords are hashed with `bcrypt`.
+- 🍪 Auth uses a simple `userId` cookie. Use stronger session handling for production.
+- 🔐 The MongoDB URL is hardcoded in `config/db.js`; environment variables are recommended.
+- 🖼️ Uploaded files should be validated more strictly before production use.
+- ✅ Add stronger validation for registration and login fields before production.
 
-## Credits
+## 🙌 Credits
 
 UI assets are based on the Materio Bootstrap admin template by ThemeSelection.
