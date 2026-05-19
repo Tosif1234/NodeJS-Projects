@@ -3,7 +3,7 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu" >
   
   <div class="app-brand demo ">
-    <a href="index.html" class="app-brand-link gap-xl-0 gap-2">
+    <a href="/" class="app-brand-link gap-xl-0 gap-2">
       <span class="app-brand-logo demo me-1">
   <span class="text-primary">
     <svg width="30" height="24" viewBox="0 0 250 196" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,6 +49,12 @@
         <a href="/users" class="menu-link">
           <i class="menu-icon icon-base ri ri-user-line"></i>
           <div data-i18n="View User">View User</div>
+        </a>
+      </li>
+      <li class="menu-item <%= activePage === 'profile' ? 'active' : '' %>">
+        <a href="/profile" class="menu-link">
+          <i class="menu-icon icon-base ri ri-user-3-line"></i>
+          <div data-i18n="My Profile">My Profile</div>
         </a>
       </li>
     </ul>

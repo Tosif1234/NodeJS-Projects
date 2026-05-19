@@ -25606,6 +25606,18 @@ body:not(.modal-open) .layout-content-navbar .layout-navbar {
   color: #8d88a8;
 }
 
+[data-bs-theme=dark] .form-floating > .form-control::placeholder,
+[data-bs-theme=dark] .form-floating > textarea.form-control::placeholder {
+  color: transparent;
+}
+
+[data-bs-theme=dark] .form-floating.form-floating-outline > .form-control:focus::placeholder,
+[data-bs-theme=dark] .form-floating.form-floating-outline > .form-control:not(:placeholder-shown)::placeholder,
+[data-bs-theme=dark] .form-floating.form-floating-outline > .form-select:focus::placeholder,
+[data-bs-theme=dark] .form-floating.form-floating-outline > .form-select:not(:placeholder-shown)::placeholder {
+  color: #8d88a8;
+}
+
 [data-bs-theme=dark] .table {
   --bs-table-color: #d7d3e7;
   --bs-table-border-color: #46415f;

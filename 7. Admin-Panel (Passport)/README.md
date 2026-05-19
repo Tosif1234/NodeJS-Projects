@@ -1,6 +1,7 @@
-# 🧩 Admin Panel EJS
+# 🧩 Admin Panel EJS with Passport
 
-A clean Node.js, Express, MongoDB, and EJS admin dashboard built with Materio Bootstrap UI. It includes admin login, dashboard analytics, user CRUD, profile image uploads, searchable/filterable user lists, CSV export, dynamic role/status UI, and light/dark theme support.
+A clean and practical admin dashboard built with **Node.js**, **Express.js**, **MongoDB**, **EJS**, and **Passport.js**.  
+It includes Passport local authentication, session-based login, user CRUD, profile management, profile image uploads, image previews, dark/light theme support, and a Materio Bootstrap dashboard UI.
 
 ## 📸 Screenshots
 
@@ -16,18 +17,23 @@ A clean Node.js, Express, MongoDB, and EJS admin dashboard built with Materio Bo
 ### 👥 User List
 ![User List](public/screenshot/userList.png)
 
+### 👤 User Profile
+![User List](public/screenshot/myProfile.png)
+
 ## ✨ Features
 
-- 🔐 Admin authentication with cookie-based login
-- 📊 Dashboard page with analytics UI
-- 👥 Add, view, edit, and delete users
-- 🖼️ Profile image upload with Multer
-- 🔎 User search and filters by role, plan, and status
-- 📤 CSV export for visible/filtered users
-- 🏷️ Dynamic role icons and status pill badges
+- 🔐 Login and registration with Passport Local Strategy
+- 🛡️ Session-based authentication using `express-session`
+- 🔑 Password hashing with `bcrypt`
+- 👤 Logged-in user profile page
+- 🧾 Add, view, edit, update, and delete users
+- 🖼️ Profile image upload with `multer`
+- ♻️ Old uploaded image cleanup when a profile image is updated
+- 👀 Live image preview before adding a user
+- 📊 Dashboard UI using Materio Bootstrap assets
 - 🌗 Light, dark, and system theme switcher
-- 🧱 Shared EJS partials for header, navbar, sidebar, footer, and scripts
-- 📁 Static assets served from `public`
+- 🧩 Reusable EJS partials for header, navbar, sidebar, footer, and scripts
+- 📁 Static assets served from the `public` folder
 
 ## 🛠️ Tech Stack
 
@@ -36,16 +42,20 @@ A clean Node.js, Express, MongoDB, and EJS admin dashboard built with Materio Bo
 - 🧩 EJS
 - 🍃 MongoDB
 - 🔗 Mongoose
+- 🛂 Passport.js
+- 🧭 Passport Local Strategy
+- 🛡️ Express Session
+- 🔐 Bcrypt
 - 🖼️ Multer
-- 🍪 Cookie Parser
-- 🎨 Bootstrap / Materio assets
+- 🎨 Bootstrap / Materio UI assets
 
 ## 📁 Project Structure
 
 ```text
 .
 |-- config/
-|   `-- db.js
+|   |-- db.js
+|   `-- passport.js
 |-- controller/
 |   `-- adminController.js
 |-- model/
@@ -66,19 +76,19 @@ A clean Node.js, Express, MongoDB, and EJS admin dashboard built with Materio Bo
 
 ## ✅ Requirements
 
-- Node.js installed
-- MongoDB running locally
-- npm installed
+- 🟢 Node.js installed
+- 📦 npm installed
+- 🍃 MongoDB running locally
 
-The database connection currently uses:
+Current MongoDB connection:
 
 ```js
 mongodb://localhost:27017/adminDB
 ```
 
-You can change it in `config/db.js` if needed.
+You can change it in `config/db.js`.
 
-## 🚀 Installation & Run
+## 🚀 Installation
 
 Install dependencies:
 
@@ -86,7 +96,7 @@ Install dependencies:
 npm install
 ```
 
-Start MongoDB locally, then run the project:
+Start the development server:
 
 ```bash
 npm run dev
@@ -98,26 +108,32 @@ Open the app:
 http://localhost:8081
 ```
 
-## 🔑 Default Admin Login
+## 🔑 Authentication Flow
 
-The app creates a default admin automatically if it does not already exist.
+This version uses **Passport.js** instead of manual cookie authentication.
 
-```text
-Email: admin@gmail.com
-Password: 1234
-```
+- `passport-local` checks email and password.
+- `bcrypt` compares the entered password with the hashed password.
+- `express-session` stores the logged-in user session.
+- `req.isAuthenticated()` protects private routes.
+- `req.user` contains the current logged-in user.
+- `req.logout()` logs the user out safely.
 
 ## 🧭 Main Routes
 
 | Method | Route | Description |
 | --- | --- | --- |
 | GET | `/login` | Login page |
-| POST | `/login` | Login submit |
-| GET | `/logout` | Logout admin |
+| POST | `/login` | Login with Passport |
+| GET | `/register` | Register page |
+| POST | `/register` | Create account and login |
+| GET | `/logout` | Logout current user |
 | GET | `/` | Dashboard |
 | GET | `/dashboard` | Dashboard |
+| GET | `/profile` | Current user profile |
+| POST | `/profile` | Update current user profile |
 | GET | `/form-layout` | Add user page |
-| POST | `/users/add` | Create user |
+| POST | `/users/add` | Create new user |
 | GET | `/users` | User list |
 | GET | `/users/edit/:id` | Edit user page |
 | POST | `/users/update/:id` | Update user |
@@ -125,7 +141,7 @@ Password: 1234
 
 ## 🧾 User Model
 
-Users are stored with these fields:
+Users are stored with:
 
 - `fullName`
 - `phoneNumber`
@@ -153,11 +169,17 @@ Runs the app with Nodemon.
 
 ## ⚠️ Production Notes
 
-- Passwords are currently stored as plain text. Use `bcrypt` before production.
-- Auth uses a simple `userId` cookie. Use stronger session handling for production.
-- The MongoDB URL is hardcoded in `config/db.js`; environment variables are recommended.
-- Uploaded files should be validated more strictly before production use.
+- Move session secret into an environment variable.
+- Use MongoDB Atlas or a secured production MongoDB server.
+- Add stricter file validation for uploads.
+- Add form validation for all create/update routes.
+- Use a persistent session store instead of the default memory store.
+- Avoid hardcoding database URLs in production.
 
 ## 🙌 Credits
 
-UI assets are based on the Materio Bootstrap admin template by ThemeSelection.
+UI assets are based on the **Materio Bootstrap Admin Template** by ThemeSelection.
+
+## 👨‍💻 Author
+
+Made with ❤️ by **Tosif Kureshi**

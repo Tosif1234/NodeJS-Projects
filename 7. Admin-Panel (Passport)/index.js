@@ -6,6 +6,8 @@ const app = express();
 const connectDB = require('./config/db');
 const adminRoute = require('./routes/adminRoute');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const passport = require('./config/passport');
 const Port = 8081;
 
 connectDB();
@@ -18,6 +20,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 app.use(express.json());
+
+app.use(session({
+    secret: 'admin-panel-secret',
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', adminRoute);
 
